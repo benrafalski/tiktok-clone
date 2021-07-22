@@ -1,7 +1,7 @@
-import Videos from './models/Video.js'
-
 const express = require('express')
 const mongoose = require('mongoose')
+
+const Video = require('./models/Video.js')
  
 
 // instance and port of the application
@@ -9,6 +9,7 @@ const app = express()
 const port = 9000
 
 // middlewares
+app.use(express.json()) // body parser for json
 
 // DB config
 const connectionURL = 'mongodb://localhost/tiktokDB'
@@ -34,9 +35,25 @@ app.get('/', (req, res) => {
     res.status(200).send('server is running')
 })
 
-// api endlpoints
+// api endpoints
 app.get('/v1/posts', (req, res) => {
     res.status(200).send(data)
+})
+
+app.get('/v2/posts', (req, res) => {
+    const dbVideos = req.body
+
+    Video.find()
+})
+
+app.post('/v2/posts', (req, res) => {
+    const dbVideos = req.body
+
+    Video.create(dbVideos, (err, data) => {
+        err 
+            ? res.status(500).send(err) // error occured on the server side
+            : res.status(201).send(data) // post was successfull, 201 code and data is sent
+    })
 })
 
 // application listener
