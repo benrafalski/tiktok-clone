@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react'
 import '../styles/Video.css'
-import video1 from '../videos/video1.mp4'
 import VideoFooter from './VideoFooter'
 import VideoSidebar from './VideoSidebar'
 

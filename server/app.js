@@ -6,7 +6,7 @@ const Video = require('./models/Video.js')
 
 // instance and port of the application
 const app = express()
-const port = 9000
+const port = process.env.PORT || 9000
 
 // middlewares
 app.use(express.json()) // body parser for json
@@ -46,8 +46,6 @@ app.get('/v1/posts', (req, res) => {
 })
 
 app.get('/v2/posts', (req, res) => {
-    const dbVideos = req.body
-    
     // not passing a first argument gets all data
     Video.find((err, data) => {
         err 
