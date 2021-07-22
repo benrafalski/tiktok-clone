@@ -10,6 +10,11 @@ const port = 9000
 
 // middlewares
 app.use(express.json()) // body parser for json
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Headers', '*')
+    next()
+})
 
 // DB config
 const connectionURL = 'mongodb://localhost/tiktokDB'
@@ -42,8 +47,13 @@ app.get('/v1/posts', (req, res) => {
 
 app.get('/v2/posts', (req, res) => {
     const dbVideos = req.body
-
-    Video.find()
+    
+    // not passing a first argument gets all data
+    Video.find((err, data) => {
+        err 
+            ? res.status(500).send(err) // error occured on the server side
+            : res.status(200).send(data) // get was successfull, 200 code and data is sent
+    })
 })
 
 app.post('/v2/posts', (req, res) => {
