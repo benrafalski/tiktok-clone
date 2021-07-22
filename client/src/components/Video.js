@@ -4,7 +4,7 @@ import video1 from '../videos/video1.mp4'
 import VideoFooter from './VideoFooter'
 import VideoSidebar from './VideoSidebar'
 
-const Video = () => {
+const Video = ({ url, channel, description, song, likes, shares, messages }) => {
     const [playing, setPlaying] = useState(false)
     const videoRef = useRef(null)
 
@@ -26,14 +26,22 @@ const Video = () => {
                 className='video__player'
                 loop
                 ref={videoRef}
-                src={video1}
+                src={url}
             ></video>
             
             {/* Video Footer */}
-            <VideoFooter/>
+            <VideoFooter 
+                channel={channel} 
+                description={description}
+                song={song}
+            />
 
             {/* Video Sidebar */}
-            <VideoSidebar/>
+            <VideoSidebar 
+                likes={likes} 
+                shares={shares} 
+                messages={messages}
+            />
 
             
         </div>
