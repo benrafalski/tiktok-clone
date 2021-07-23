@@ -13,6 +13,7 @@ app.use(express.json()) // body parser for json
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Headers', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'PUT')
     next()
 })
 
@@ -61,6 +62,17 @@ app.post('/v2/posts', (req, res) => {
         err 
             ? res.status(500).send(err) // error occured on the server side
             : res.status(201).send(data) // post was successfull, 201 code and data is sent
+    })
+})
+
+// update likes
+app.put('/v2/like/:id', (req, res) => {
+    console.log('put')
+    // params: id of document, new body of document, callback
+    Video.findByIdAndUpdate(req.params.id, req.body, (err, data) => {
+        err 
+            ? res.status(500).send(err)
+            : res.status(201).send(data)
     })
 })
 

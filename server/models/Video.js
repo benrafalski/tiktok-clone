@@ -29,6 +29,10 @@ const VideoSchema = mongoose.Schema({
     messages: {
         type: Number,
         required: true
+    },
+    liked_by_user: {
+        type: Boolean,
+        required: true
     }
 })
 

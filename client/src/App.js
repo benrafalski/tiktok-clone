@@ -13,6 +13,11 @@ function App() {
       setVideos(response.data)
     }
 
+    /* const likePost = async (id, likes) => {
+      const res = await axios.put(`/v2/like/${id}`, { likes : likes + 1 })
+      
+    } */
+
     fetchPosts()
   }, [])
 
@@ -21,6 +26,7 @@ function App() {
       <div className='app__videos'>
         {videos.map((video, index) => (
           <Video 
+            id={video._id}
             url={videosFiles[index]}
             channel={video.channel} 
             description={video.description} 
@@ -28,6 +34,8 @@ function App() {
             likes={video.likes} 
             shares={video.shares} 
             messages={video.messages}
+            videos={videos}
+            likedByUser={video.liked_by_user}
           />
         ))}
       </div>
